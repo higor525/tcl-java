@@ -1,0 +1,32 @@
+name: Build Mod
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v3
+
+      - name: Configurar Java 8
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+
+      - name: Dar permissao ao gradlew
+        run: chmod +x gradlew
+
+      - name: Compilar
+        run: ./gradlew build --no-daemon
+
+      - name: Salvar o .jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: HigorClient
+          path: build/libs/*.jar
