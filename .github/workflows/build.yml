@@ -26,7 +26,7 @@ jobs:
         run: ./gradlew build --no-daemon
 
       - name: Salvar o .jar
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: HigorClient
           path: build/libs/*.jar
